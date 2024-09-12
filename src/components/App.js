@@ -24,18 +24,18 @@ const App = () => {
     };
     getData();
   }, [dispatch]);
-
+    const show = data.map((post, index) => (
+      <ul key={index} style={{ listStyle: "none", textAlign: "left", padding: "0" }}>
+        <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{post.title}</li>
+        <li className="body"><span style={{ fontWeight: "bold" }}>Body: </span>{post.body}</li>
+      </ul>
+    ));
   return (
     <div>
       <h1>A short Naration of Lorem Ipsum</h1>
       <h4>Below Contains A title and Body gotten froma random API, Please take your time to Review</h4>
      {
-        data && data.map((post, index) => (
-          <ul key={index} style={{ listStyle: "none", textAlign: "left", padding: "0" }}>
-            <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{post.title}</li>
-            <li className="body"><span style={{ fontWeight: "bold" }}>Body: </span>{post.body}</li>
-          </ul>
-        ))
+        loading ? <p>Loading State</p> : show
       }
     </div>
   );
