@@ -16,29 +16,29 @@ const App = () => {
         const res = await fetch(Api);
         const fetchedData = await res.json();
         dispatch(addData(fetchedData.slice(0, 10) || []));
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false); 
       } catch (error) {
         console.error("Failed to fetch data:", error);
-        setLoading(false); // Ensure loading is set to false even if an error occurs
+        setLoading(false); 
       }
     };
     getData();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>; // Render loading state
-  }
+  }, [dispatch]);
 
   return (
     <div>
       <h1>A short Naration of Lorem Ipsum</h1>
-      <h4>Below Contains A title and Body gotten froma random API, Please take your time to Review</h4>
-      {data && data.map((post, index) => (
-        <ul key={index} style={{ listStyle: "none", textAlign: "left", padding: "0" }}>
-          <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{post.title}</li>
-          <li className="body"><span style={{ fontWeight: "bold" }}>Body: </span>{post.body}</li>
-        </ul>
-      ))}
+      <h4>Below Contains A title and Body gotten from a random API, Please take your time to Review</h4>
+      {loading ? (
+        <div>Loading...</div> // Render loading state only when loading is true
+      ) : (
+        data && data.map((post, index) => (
+          <ul key={index} style={{ listStyle: "none", textAlign: "left", padding: "0" }}>
+            <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{post.title}</li>
+            <li className="body"><span style={{ fontWeight: "bold" }}>Body: </span>{post.body}</li>
+          </ul>
+        ))
+      )}
     </div>
   );
 }
