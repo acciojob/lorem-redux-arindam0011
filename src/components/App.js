@@ -15,7 +15,7 @@ const App = () => {
       try {
         const res = await fetch(Api);
         const fetchedData = await res.json();
-        dispatch(addData(fetchedData[1] || {}));
+        dispatch(addData(fetchedData.slice(0, 10) || []));
         setLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -23,7 +23,7 @@ const App = () => {
       }
     };
     getData();
-  }, [dispatch]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>; // Render loading state
@@ -33,12 +33,12 @@ const App = () => {
     <div>
       <h1>A short Naration of Lorem Ipsum</h1>
       <h4>Below Contains A title and Body gotten froma random API, Please take your time to Review</h4>
-      {data && (
-        <ul style={{ listStyle: "none" , textAlign: "left" , padding: "0" }}>
-          <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{data.title}</li>
-          <li className="body"><span style={{ fontWeight: "bold" }}>Body: </span>{data.body}</li>
+      {data && data.map((post, index) => (
+        <ul key={index} style={{ listStyle: "none", textAlign: "left", padding: "0" }}>
+          <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{post.title}</li>
+          <li className="body"><span style={{ fontWeight: "bold" }}>Body: </span>{post.body}</li>
         </ul>
-      )}
+      ))}
     </div>
   );
 }
