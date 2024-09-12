@@ -32,7 +32,7 @@ const App = () => {
   return (
     <div>
       <h1>A short Naration of Lorem Ipsum</h1>
-      <h4>Below Contains A title and Body gotten from a random API, Please take your time to Review</h4>
+      <h4>Below Contains A title and Body gotten froma random API, Please take your time to Review</h4>
       {data && (
         <ul style={{ listStyle: "none" , textAlign: "left" , padding: "0" }}>
           <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{data.title}</li>
