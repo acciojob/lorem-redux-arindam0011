@@ -6,7 +6,7 @@ import 'regenerator-runtime/runtime';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { data, status } = useSelector((state) => state.loremDAta);
+  const { data } = useSelector((state) => state.loremDAta);
   const Api = "https://jsonplaceholder.typicode.com/posts";
 
   useEffect(() => {
@@ -15,7 +15,10 @@ const App = () => {
       try {
         const res = await fetch(Api);
         const fetchedData = await res.json();
-        dispatch(addData(fetchedData.slice(0, 10) || []));
+        setTimeout(() => {
+          
+          dispatch(addData(fetchedData.slice(0, 10) || []));
+        }, 4000);
       } catch (error) {
         dispatch(setError("Failed to fetch data"));
       }
@@ -27,10 +30,7 @@ const App = () => {
     <div>
       <h1>A short Naration of Lorem Ipsum</h1>
       <h4>Below Contains A title and Body gotten froma random API, Please take your time to Review</h4>
-      {status === 'loading' && <div className="loading">Loading...</div>} {/* Ensure class is consistent */}
-      {status === 'failed' && <div className="error">Error loading data.</div>}
-      {status === 'succeeded' && (
-        <div>
+      {data.length > 0 ? (<div>
           {data.map((post, index) => (
             <ul key={index} style={{ listStyle: "none", textAlign: "left", padding: "0" }}>
               <li className="title"><span style={{ fontWeight: "bold" }}>Title: </span>{post.title}</li>
@@ -38,7 +38,7 @@ const App = () => {
             </ul>
           ))}
         </div>
-      )}
+      ) : <div>loading state</div>} 
     </div>
   );
 }
