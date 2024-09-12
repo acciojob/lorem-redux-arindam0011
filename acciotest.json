@@ -1,4 +1,4 @@
 {
     "testRepo": "lorem-redux-solution",
-    "pathToFile": "cypress/test.spec.js"
+    "pathToFile": "Cypress/test.spec.js"
 }

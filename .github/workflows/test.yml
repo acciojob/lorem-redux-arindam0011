@@ -20,4 +20,4 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          npx cypress run --spec cypress/test.spec.js
+          npx cypress run --spec Cypress/test.spec.js
