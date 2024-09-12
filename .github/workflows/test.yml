@@ -1,10 +1,23 @@
-name: Acciojob Tests
+name: Run Cypress Tests
 
 on:
- push:
-    branches: [ "main","master" ]
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
 
 jobs:
-  calling-acciojob-main-action:
-    uses: acciojob/acciojob-tests-action/.github/workflows/main-action.yml@main
-    secrets: inherit
+  cypress-tests:
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Run Cypress tests
+        run: |
+          npx cypress run --spec cypress/test.spec.js
