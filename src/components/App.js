@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div>
       <h1>A short Naration of Lorem Ipsum</h1>
-      <h4>Below Contains A title and Body gotten from a random API, Please take your time to Review</h4>
+      <h4>Below Contains A title and Body gotten froma random API, Please take your time to Review</h4>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'failed' && <div>Error loading data.</div>}
       {status === 'succeeded' && (
